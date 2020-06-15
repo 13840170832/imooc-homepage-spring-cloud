@@ -1,0 +1,26 @@
+server:
+  port: 7000
+  servlet:
+    context-path: /homepage-user
+
+spring:
+  application:
+    name: eureka-client-homepage-user
+  datasource:
+    url: jdbc:mysql://localhost:3306/imooc_homepage_sc?characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    tomcat:
+      max-active: 4
+      min-idle: 2
+      initial-size: 2
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/

@@ -11,8 +11,8 @@ import com.imooc.homepage.entity.HomepageUserCourse;
 import com.imooc.homepage.service.IUserService;
 import com.imooc.homepage.vo.CreateUserRequest;
 import com.imooc.homepage.vo.UserCourseInfo;
-import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -30,6 +30,7 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private HomepageUserCourseDao homepageUserCourseDao;
 
+    @Qualifier("")
     @Autowired
     private CourseClient courseClient;
 
