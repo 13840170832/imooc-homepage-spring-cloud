@@ -5,6 +5,7 @@ import com.imooc.homepage.UserInfo;
 import com.imooc.homepage.service.IUserService;
 import com.imooc.homepage.vo.CreateUserRequest;
 import com.imooc.homepage.vo.UserCourseInfo;
+import com.imooc.homepage.vo.UserCourseRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,11 @@ public class HomepageUserController {
 
         log.info("<homepage-user>: create user -> {}", JSON.toJSONString(request));
         return userService.createUser(request);
+    }
+
+    @PostMapping("/add/user-course")
+    public UserCourseInfo addUserCourse(@RequestBody UserCourseRequest request){
+        return userService.addUserCourse(request);
     }
 
     @GetMapping("/get/user")

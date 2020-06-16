@@ -9,7 +9,7 @@ import java.util.List;
 
 /**熔断降级*/
 @Component
-public class CourseClientHytrix implements CourseClient {
+public class CourseClientHystrix implements CourseClient {
 
     @Override
     public CourseInfo getCourseInfo(Long id){

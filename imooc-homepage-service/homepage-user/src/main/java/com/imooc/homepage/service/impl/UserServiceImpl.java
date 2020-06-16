@@ -11,6 +11,7 @@ import com.imooc.homepage.entity.HomepageUserCourse;
 import com.imooc.homepage.service.IUserService;
 import com.imooc.homepage.vo.CreateUserRequest;
 import com.imooc.homepage.vo.UserCourseInfo;
+import com.imooc.homepage.vo.UserCourseRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -46,6 +47,30 @@ public class UserServiceImpl implements IUserService {
                 request.getUsername(),request.getEmail()
         ));
         return new UserInfo(newUser.getId(),newUser.getUsername(),newUser.getEmail());
+    }
+
+    @Override
+    public UserCourseInfo addUserCourse(UserCourseRequest request){
+        Optional<HomepageUser> user = homepageUserDao.findById(request.getUserId());
+        if(!user.isPresent()){
+            return UserCourseInfo.invalid();
+        }
+        List<Long> courseIds = request.getCourseIds();
+        for(Long i : courseIds){
+//            CourseInfo course = courseClient.getCourseInfo(i);
+//            if(course.getId()<=0){
+//                continue;
+//            }
+            Optional<HomepageUserCourse> userCourseOptional = homepageUserCourseDao.findByUserIdAndCourseId(request.getUserId(),i);
+            if(userCourseOptional.isPresent()){
+                continue;
+            }
+            HomepageUserCourse uc = HomepageUserCourse.builder()
+                    .userId(request.getUserId())
+                    .courseId(i).build();
+            homepageUserCourseDao.save(uc);
+        }
+        return this.getUserCourseInfo(request.getUserId());
     }
 
     @Override
