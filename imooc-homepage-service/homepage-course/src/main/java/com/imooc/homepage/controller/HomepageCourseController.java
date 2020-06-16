@@ -7,10 +7,7 @@ import com.imooc.homepage.service.ICourseService;
 import com.netflix.discovery.converters.Auto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,7 +22,7 @@ public class HomepageCourseController {
      * 不通过网关访问时的url：127.0.0.1:7001/homepage-course/get/course?id=
      * 通过网关访问时的url：  127.0.0.1:9000/imooc/homepage-course/get/course?id=
      */
-    @GetMapping("/get/course")
+    @RequestMapping("/get/course")
     public CourseInfo getCourseInfo(Long id){
         log.info("<homepage-course>: get course -> {}", JSON.toJSONString(id));
         return courseService.getCourseInfo(id);

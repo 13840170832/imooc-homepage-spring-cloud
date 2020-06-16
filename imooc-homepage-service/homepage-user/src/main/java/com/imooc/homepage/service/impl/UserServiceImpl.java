@@ -57,10 +57,10 @@ public class UserServiceImpl implements IUserService {
         }
         List<Long> courseIds = request.getCourseIds();
         for(Long i : courseIds){
-//            CourseInfo course = courseClient.getCourseInfo(i);
-//            if(course.getId()<=0){
-//                continue;
-//            }
+            CourseInfo course = courseClient.getCourseInfo(i);
+            if(course.getId()<=0){
+                continue;
+            }
             Optional<HomepageUserCourse> userCourseOptional = homepageUserCourseDao.findByUserIdAndCourseId(request.getUserId(),i);
             if(userCourseOptional.isPresent()){
                 continue;
